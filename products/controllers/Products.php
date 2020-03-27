@@ -24,18 +24,25 @@ class Products extends CI_Controller {
 
 	public function add()
 	{
-		$data['judul'] = "Tambah Produk";
-        $data['username'] = $this->session->userdata('username');
-		$this->load->view('dashboard/template/home_header', $data);
-		$this->load->view('dashboard/template/home_sidebar');
-		$this->load->view('dashboard/template/home_topbar', $data);
-		$this->load->view('add');
-		$this->load->view('dashboard/template/home_footer');
+        $data['kategori'] = $this->Barang->getAllKategori();
+        if(!$this->Barang->getAllKategori()){
+            $this->session->set_flashdata('error', 'Kategori tidak ditemukan, silahkan tambahkan kategori terlebih dahulu');
+            redirect('products');
+        } else {
+            $data['judul'] = "Tambah Produk";
+            $data['username'] = $this->session->userdata('username');
+            $this->load->view('dashboard/template/home_header', $data);
+            $this->load->view('dashboard/template/home_sidebar');
+            $this->load->view('dashboard/template/home_topbar', $data);
+            $this->load->view('add', $data);
+            $this->load->view('dashboard/template/home_footer');
+        }
 	}
 
 	public function edit($id)
 	{
 		$data['judul'] = "Edit Produk";
+        $data['kategori'] = $this->Barang->getAllKategori();
 		$data['edit'] = $this->Barang->getBarang($id);
         $data['username'] = $this->session->userdata('username');
 		$this->load->view('dashboard/template/home_header', $data);
@@ -49,25 +56,22 @@ class Products extends CI_Controller {
     {
         $username = $this->session->userdata('username');
 
-        if ($username == '') {
-            redirect('login');
-        } else {
-            $this->form_validation->set_rules('nama_produk', 'Nama', 'trim|required');
-            $this->form_validation->set_rules('harga_produk', 'Harga', 'trim|required');
-            $this->form_validation->set_rules('deskripsi_produk', 'Deskripsi', 'trim|required');
-            $this->form_validation->set_rules('kategori_produk', 'Kategori', 'trim|required');
+        $this->form_validation->set_rules('nama_produk', 'Nama', 'trim|required');
+        $this->form_validation->set_rules('harga_produk', 'Harga', 'trim|required');
+        $this->form_validation->set_rules('deskripsi_produk', 'Deskripsi', 'trim|required');
+        $this->form_validation->set_rules('kategori_produk', 'Kategori', 'trim|required');
 
-            if ($this->form_validation->run() == false) {
-				$data['errors'] = null;
-				$this->load->view('dashboard/template/home_header', $data);
-				$this->load->view('dashboard/template/home_sidebar');
-				$this->load->view('dashboard/template/home_topbar');
-				$this->load->view('add', $data);
-				$this->load->view('dashboard/template/home_footer');
-            } else {
-                $this->_tambahproduk();
-            }
+        if ($this->form_validation->run() == false) {
+            $data['errors'] = null;
+            $this->load->view('dashboard/template/home_header', $data);
+            $this->load->view('dashboard/template/home_sidebar');
+            $this->load->view('dashboard/template/home_topbar');
+            $this->load->view('add', $data);
+            $this->load->view('dashboard/template/home_footer');
+        } else {
+            $this->_tambahproduk();
         }
+    
     }
 
     private function _tambahproduk()
@@ -98,12 +102,8 @@ class Products extends CI_Controller {
         $data['files']  = print_r($_FILES, true);
         $data['post']   = print_r($_POST, true);
         if ($data['errors'] = $this->upload->display_errors('<p>', '</p>')) {
-        	$data['username'] = $this->session->userdata('username');
-			$this->load->view('dashboard/template/home_header', $data);
-			$this->load->view('dashboard/template/home_sidebar');
-			$this->load->view('dashboard/template/home_topbar');
-			$this->load->view('add', $data);
-			$this->load->view('dashboard/template/home_footer');
+            $this->session->set_flashdata('error', $this->upload->display_errors('<p>', '</p>'));
+            redirect('products');
         } else {
             $dataa = array(
 				'prod_id' => $final,

@@ -32,6 +32,87 @@ class Category extends CI_Controller {
 		$this->load->view('dashboard/template/home_topbar', $data);
 		$this->load->view('barang', $data);
 		$this->load->view('dashboard/template/home_footer');
+	}
+	
+	public function daftar($id)
+	{
+		$data['judul'] = "Daftar Produk";
+        $data['barang'] = $this->Kategori->getBarangKategori($id);
+        $data['username'] = $this->session->userdata('username');
+		$this->load->view('dashboard/template/home_header', $data);
+		$this->load->view('dashboard/template/home_sidebar');
+		$this->load->view('dashboard/template/home_topbar', $data);
+		$this->load->view('products/index', $data);
+		$this->load->view('dashboard/template/home_footer');
+	}
+
+	public function add()
+	{
+		$data['judul'] = "Tambah Kategori";
+        $data['username'] = $this->session->userdata('username');
+		$this->load->view('dashboard/template/home_header', $data);
+		$this->load->view('dashboard/template/home_sidebar');
+		$this->load->view('dashboard/template/home_topbar', $data);
+		$this->load->view('add');
+		$this->load->view('dashboard/template/home_footer');
+	}
+
+
+	public function edit($id)
+	{
+		$data['judul'] = "Edit Produk";
+		$data['edit'] = $this->Kategori->getKategori($id);
+        $data['username'] = $this->session->userdata('username');
+		$this->load->view('dashboard/template/home_header', $data);
+		$this->load->view('dashboard/template/home_sidebar');
+		$this->load->view('dashboard/template/home_topbar', $data);
+		$this->load->view('edit', $data);
+		$this->load->view('dashboard/template/home_footer');
+	}
+
+    public function tambah_category()
+    {
+		$this->form_validation->set_rules('id_kategori', 'ID', 'trim|required');
+		$this->form_validation->set_rules('nama_kategori', 'Nama', 'trim|required');
+
+		if ($this->form_validation->run() == false) {
+			$data['errors'] = null;
+			$this->load->view('dashboard/template/home_header', $data);
+			$this->load->view('dashboard/template/home_sidebar');
+			$this->load->view('dashboard/template/home_topbar', $data);
+			$this->load->view('add', $data);
+			$this->load->view('dashboard/template/home_footer');
+		} else {
+			$this->Kategori->tambahKategori();
+			redirect('category');
+		}
     }
+
+	public function edit_kategori()
+	{
+		$this->form_validation->set_rules('id_kategori', 'ID', 'trim|required');
+		$this->form_validation->set_rules('nama_kategori', 'Nama', 'trim|required');
+
+		if ($this->form_validation->run() == false) {
+			$data['errors'] = null;
+			$this->load->view('dashboard/template/home_header', $data);
+			$this->load->view('dashboard/template/home_sidebar');
+			$this->load->view('dashboard/template/home_topbar', $data);
+			$this->load->view('add', $data);
+			$this->load->view('dashboard/template/home_footer');
+		} else {
+			$this->Kategori->editKategori();
+			redirect('category');
+		}
+	}
+
+    public function delete($id)
+    {
+        $this->db->where('cat_id', $id);
+        $this->db->delete('category');
+        redirect('category');
+    }
+
+	
 
 }

@@ -23,7 +23,14 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-4">
-                        <input type="text" name="kategori_produk" class="form-control form-control-user" placeholder="Kategori Produk">
+                        <span class="h6 mr-2">Kategori Produk</span>
+                        <select name="kategori_produk" class="form-control form-control-user">
+                        <?php 
+                        foreach($kategori as $p):
+                            echo "<option value='".$p['cat_id']."'>".$p['cat_name']."</option>";
+                        endforeach; 
+                        ?>        
+                        </select>
                         <?= form_error('kategori_produk', '<small class="text-danger">', '<small>'); ?>
                     </div>
                     <div class="col-sm-8 mt-3">

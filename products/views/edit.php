@@ -25,7 +25,18 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-4">
-                        <input type="text" name="kategori_produk" class="form-control form-control-user" placeholder="Kategori Produk" value="<?= $p['cat_id']; ?>">
+                        <span class="h6 mr-2">Kategori Produk</span>
+                        <select name="kategori_produk" class="form-control form-control-user">
+                        <?php 
+                        foreach($kategori as $k):
+                            if ($k['cat_id'] == $p['cat_id']){
+                            echo "<option value='".$k['cat_id']."' selected>".$k['cat_name']."</option>";
+                            } else {
+                            echo "<option value='".$k['cat_id']."'>".$k['cat_name']."</option>";
+                            }
+                        endforeach; 
+                        ?>        
+                        </select>
                         <?= form_error('kategori_produk', '<small class="text-danger">', '<small>'); ?>
                     </div>
                     <div class="col-sm-8 mt-3">

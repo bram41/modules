@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <h4><?= $p['cat_name']; ?></h4>
 
-                            <a href="#" class="btn btn-info btn-icon-split float-right">
+                            <a href="<?= base_url('category/daftar/'), $p['cat_id']; ?>" class="btn btn-info btn-icon-split float-right">
                                 <span class="text">Lihat Barang</span>
                             </a>
                         </div>
