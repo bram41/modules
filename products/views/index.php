@@ -1,0 +1,55 @@
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <div class="row">
+        <h1 class="h3 mb-4 text-gray-800 ml-3">Daftar Produk</h1>
+        <a class="btn btn-primary h3 mb-4 ml-auto mr-3" href="<?= base_url('products/add'); ?>">Tambah Produk</a>
+    </div>
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Gambar</th>
+                            <th>Nama</th>
+                            <th>Harga</th>
+                            <th>Vendor</th>
+                            <th>Kategori</th>
+                            <th>Deskripsi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // if (is_array($barang) || is_object($barang))
+                        // {           
+                        foreach ($barang as $p) : ?>
+                            <tr>
+                                <td>
+                                    <img src="<?= base_url('assets/img/produk/'), $p['prod_image'] ?>" height="50px">
+                                </td>
+                                <td><?= $p['prod_name'] ?></td>
+                                <td><?= $p['prod_price'] ?></td>
+                                <td><?= $p['vend_id'] ?></td>
+                                <td><?= $p['cat_name'] ?></td>
+                                <td><?= $p['prod_desc'] ?></td>
+                                <td>
+                                    <center>
+                                        <a class="btn btn-success" href="<?= base_url('products/edit/'), $p['prod_id'] ?>">Edit</a>
+                                        <a class="btn btn-danger" href="<?= base_url('products/delete/'), $p['prod_id'] ?>">Delete</a>
+                                    <center>
+                                </td>
+                            </tr>
+                        <? endforeach;
+                         ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
