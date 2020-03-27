@@ -108,9 +108,31 @@ class Category extends CI_Controller {
 
     public function delete($id)
     {
-        $this->db->where('cat_id', $id);
-        $this->db->delete('category');
-        redirect('category');
+		$row = $this->db->query('select prod_name from products where cat_id ="'.$id.'"');
+		$kategori = $row->row();
+		$namaa = $kategori->prod_name;
+		if($namaa != null){ 
+			$this->session->set_flashdata('error', 'Kategori tidak dapat dihapus karena terdapat produk');
+		} else {
+			$row = $this->db->query('select cat_name from category where cat_id ="'.$id.'"');
+			$kategori = $row->row();
+			$nama = $kategori->cat_name;
+
+			$this->db->where('cat_id', $id);
+			$this->db->delete('category');
+			
+			$ip_address = $_SERVER['REMOTE_ADDR'];
+			$username = $this->session->userdata('username');
+			$keterangan = "Menghapus kategori $nama";
+			$data = array(
+				'username' => $username,
+				'ip' => $ip_address,
+				'keterangan' => $keterangan
+			);
+			$this->db->insert('log', $data);
+		}
+		
+		redirect('category'); 
     }
 
 	

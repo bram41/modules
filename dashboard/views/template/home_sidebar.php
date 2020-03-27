@@ -46,6 +46,15 @@
     </li>
 
     <!-- Divider -->
+
+    
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('account'); ?>">
+            <i class="fas fa-stream"></i>
+            <span>Log</span></a>
+    </li>
+
+    <!-- Divider -->
     <hr class="sidebar-divider">
 
     <!-- Sidebar Toggler (Sidebar) -->

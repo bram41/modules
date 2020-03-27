@@ -116,6 +116,17 @@ class Products extends CI_Controller {
             );
 
             $this->db->insert('products', $dataa);
+
+            $ip_address = $_SERVER['REMOTE_ADDR'];
+            $username = $this->session->userdata('username');
+            $keterangan = "Menambahkan produk $nama_produk";
+            $data = array(
+                'username' => $username,
+                'ip' => $ip_address,
+                'keterangan' => $keterangan
+            );
+            $this->db->insert('log', $data);  
+
             redirect('products');
         }
     }
@@ -190,7 +201,6 @@ class Products extends CI_Controller {
 
                 $this->db->where('prod_id', $prod_id);
                 $this->db->update('products', $data);
-                redirect('products');
             }
         } else {
             $data = array(
@@ -204,19 +214,44 @@ class Products extends CI_Controller {
 
             $this->db->where('prod_id', $prod_id);
             $this->db->update('products', $data);
-            redirect('products');
         }
+
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+        $username = $this->session->userdata('username');
+        $keterangan = "Mengubah produk $nama_produk";
+        $data = array(
+            'username' => $username,
+            'ip' => $ip_address,
+            'keterangan' => $keterangan
+        );
+        $this->db->insert('log', $data);  
+
+        redirect('products');
+
     }
 
     public function delete($id)
     {
         $this->db->where('prod_id', $id);
         $image = $this->db->get('products')->result_array();
+
         foreach ($image as $p) :
+        $nama = $p['prod_name'];
         $gambar = $p['prod_image'];
         $path = "./assets/img/produk/$gambar";
         unlink($path); 
         endforeach;
+
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+        $username = $this->session->userdata('username');
+        $keterangan = "Menghapus produk $nama";
+        $data = array(
+            'username' => $username,
+            'ip' => $ip_address,
+            'keterangan' => $keterangan
+        );
+        $this->db->insert('log', $data);    
+
         $this->db->where('prod_id', $id);
         $this->db->delete('products');
         redirect('products');

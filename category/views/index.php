@@ -4,6 +4,14 @@
     <!-- Page Heading -->
     <div class="row">
         <h1 class="h3 mb-4 text-gray-800 ml-3">Daftar Kategori</h1>
+        <?php if($this->session->flashdata('error') == TRUE): ?>
+        <div class="alert alert-danger alert-dismissible fade show ml-5" role="alert">
+            <?= $this->session->flashdata('error'); ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <?php endif; ?>
         <a class="btn btn-primary h3 mb-4 ml-auto mr-3" href="<?= base_url('category/add'); ?>">Tambah Kategori</a>
     </div>
     <!-- DataTales Example -->

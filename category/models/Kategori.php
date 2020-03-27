@@ -16,13 +16,28 @@ class Kategori extends CI_Model{
     public function editKategori()
     {
         $id_kategori = $this->input->post('id_kategori', true);
+
+		$row = $this->db->query('select cat_name from category where cat_id ="'.$id_kategori.'"');
+		$kategori = $row->row();
+        $namas = $kategori->cat_name;
+        
         $nama_kategori = $this->input->post('nama_kategori', true);
         $data = array(
-            'cat_id' => $id_kategori,
             'cat_name' => $nama_kategori
         );
         $this->db->where('cat_id', $id_kategori);
         $this->db->update('category', $data);
+
+		
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+        $username = $this->session->userdata('username');
+        $keterangan = "Mengubah kategori $namas menjadi $nama_kategori";
+        $data = array(
+            'username' => $username,
+            'ip' => $ip_address,
+            'keterangan' => $keterangan
+        );
+        $this->db->insert('log', $data);    
     }
 
     public function tambahKategori()
@@ -34,7 +49,17 @@ class Kategori extends CI_Model{
 			'cat_name' => $nama_kategori
 		);
 
-		$this->db->insert('category', $dataa);
+        $this->db->insert('category', $dataa);
+        
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+        $username = $this->session->userdata('username');
+        $keterangan = "Menambahkan kategori $nama_kategori";
+        $data = array(
+            'username' => $username,
+            'ip' => $ip_address,
+            'keterangan' => $keterangan
+        );
+        $this->db->insert('log', $data);    
     }
 
     public function getBarangKategori($id)
