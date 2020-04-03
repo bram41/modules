@@ -33,8 +33,6 @@
                     </thead>
                     <tbody>
                         <?php
-                        // if (is_array($barang) || is_object($barang))
-                        // {           
                         foreach ($barang as $p) : ?>
                             <tr>
                                 <td>

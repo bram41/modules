@@ -42,19 +42,19 @@
         endforeach; ?>
         <div class="row">
             <?php
-                if ($product == 0) { ?>
-                        <div class="col-md-4 offset-md-6 mt-4">
-                            <h4>Total Belanja : Rp. <?= number_format($price,0,",",".");?>  </h4>
-                        </div>
-                        <div class="col-md-2 mt-3">
-                            <a class="btn btn-light h2 float-right mr-5" href="<?= base_url('beranda/co'); ?>">Checkout</a>
-                        </div>
-                <? } else { ?>
+                if (!$product) { ?>
                         <div class="col-12 mt-4">
                             <center>
                                 <h4>Keranjang belanja masih kosong, silahkan memilih produk</h4>
                                 <a href="<?= base_url(''); ?>" class="h4 text-white mt-4">Kembali ke Beranda</a>
                             </center>
+                        </div>
+                <? } else { ?>
+                        <div class="col-md-4 offset-md-6 mt-4">
+                            <h4>Total Belanja : Rp. <?= number_format($price,0,",",".");?>  </h4>
+                        </div>
+                        <div class="col-md-2 mt-3">
+                            <a class="btn btn-light h2 float-right mr-5" href="<?= base_url('beranda/co'); ?>">Checkout</a>
                         </div>
                 <? }
             ?>

@@ -49,6 +49,10 @@
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="<?= base_url('beranda/pesanan') ?>">
+                    <i class="fas fa-align-justify fa-sm fa-fw mr-2 text-gray-400""></i>
+                        Daftar Pesanan
+                    </a>
                     <a class="dropdown-item" href="<?= base_url('beranda/keranjang') ?>">
                         <i class="fas fa-shopping-cart fa-sm fa-fw mr-2 text-gray-400""></i>
                         Keranjang Belanja

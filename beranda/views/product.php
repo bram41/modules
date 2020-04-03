@@ -11,7 +11,7 @@
                 <h2><?= $p['prod_name'] ?></h2>
                     <div class="row mb-3">
                         <div class="col-6">
-                            <h4>Rp. <?= $p['prod_price'] ?></h4>
+                            <h4>Rp. <?= number_format($p['prod_price'],0,",",".");?></h4>
                         </div>
                         <div class="col-2">
                             <form action="<?= base_url('beranda/atc'); ?>" method="POST">

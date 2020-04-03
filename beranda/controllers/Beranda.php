@@ -109,8 +109,38 @@ class Beranda extends CI_Controller {
 
      public function berhasil()
      {
-          $this->load->view('template/beranda_header');
+          $data['title'] = "Pesanan Berhasil";
+          $this->load->view('template/beranda_header', $data);
           $this->load->view('berhasil');
           $this->load->view('template/beranda_footer');
+     }
+
+     public function pesanan()
+     {
+          if ($this->simple_login->cek_login() == TRUE){
+               redirect('');
+          } else {
+               $data['order'] = $this->mBeranda->getOrder();
+               $data['title'] = "Daftar Pesanan";
+               $this->load->view('template/beranda_header', $data);
+               $this->load->view('pesanan', $data);
+               $this->load->view('template/beranda_footer');
+          }
+     }
+
+     public function pembayaran()
+     {
+               $data['title'] = "Cara Pembayaran";
+               $this->load->view('template/beranda_header', $data);
+               $this->load->view('pembayaran');
+               $this->load->view('template/beranda_footer');
+     }
+
+     public function about()
+     {
+               $data['title'] = "Tentang RentALL";
+               $this->load->view('template/beranda_header', $data);
+               $this->load->view('about');
+               $this->load->view('template/beranda_footer');
      }
 }

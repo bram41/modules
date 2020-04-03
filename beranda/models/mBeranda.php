@@ -112,4 +112,12 @@ class mBeranda extends CI_Model{
         $this->session->set_flashdata('berhasil', 'Rp. '.number_format($total_bayar,0,",",".").' ');
         redirect('beranda/berhasil');
     }
+
+    public function getOrder()
+    {
+        $id_user = $this->id_user();
+
+        $this->db->where('cust_id', $id_user);
+        return $this->db->get('orders')->result_array();
+    }
 }

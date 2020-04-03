@@ -13,7 +13,7 @@
                                 <p class="card-text text-dark"><?= $p['prod_desc'] ?></p>
                                 <table>
                                     <tr>
-                                        <td width="50%"><h6 class="text-dark center">Rp. <?= $p['prod_price'] ?></h6></td>
+                                        <td width="50%"><h6 class="text-dark center">Rp. <?= number_format($p['prod_price'],0,",",".");?></h6></td>
                                         <td><a href="<?= base_url('beranda/product/'), $p['prod_id'] ?>" class="btn btn-primary">Lihat Produk</a></td>
                                     </tr>
                                 </table>
