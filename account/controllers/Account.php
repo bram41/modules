@@ -5,6 +5,7 @@ class Account extends CI_Controller {
 
     public function index()
     {
+        $this->simple_login->cek_admin(); 
         $data['judul'] = "Daftar Log";
         $data['log'] = $this->db->get('log')->result_array();
         $data['username'] = $this->session->userdata('username');

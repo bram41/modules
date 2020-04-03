@@ -6,7 +6,7 @@ class Products extends CI_Controller {
 	function __construct()
 	{
         parent::__construct();
-        $this->simple_login->cek_login(); 
+        $this->simple_login->cek_admin(); 
         $this->load->model('Barang');
 	}
 	

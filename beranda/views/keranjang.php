@@ -42,7 +42,7 @@
         endforeach; ?>
         <div class="row">
             <?php
-                if ($product->num_rows() > 0) { ?>
+                if ($product == 0) { ?>
                         <div class="col-md-4 offset-md-6 mt-4">
                             <h4>Total Belanja : Rp. <?= number_format($price,0,",",".");?>  </h4>
                         </div>
