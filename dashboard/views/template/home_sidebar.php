@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url('admin/welcome'); ?>">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url(''); ?>">
         <div class="sidebar-brand-text ml-2">E-Commerce</div>
     </a>
     <!-- Divider -->
@@ -38,14 +38,14 @@
     </div>
     </li>
 
-    <!-- Nav Item - Profil User -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('category'); ?>">
-            <i class="fas fa-align-justify"></i>
-            <span>Kategori</span></a>
-    </li>
-
-    <!-- Divider -->
+    <?php if($this->session->userdata('role') == '1'): ?>
+        <!-- Nav Item - Profil User -->
+        <li class="nav-item">
+            <a class="nav-link" href="<?= base_url('category'); ?>">
+                <i class="fas fa-align-justify"></i>
+                <span>Kategori</span></a>
+        </li>
+    <? endif; ?>
 
     
     <li class="nav-item">

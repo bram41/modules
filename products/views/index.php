@@ -24,7 +24,7 @@
                         <tr>
                             <th>Gambar</th>
                             <th>Nama</th>
-                            <th>Harga</th>
+                            <th>Biaya</th>
                             <th>Vendor</th>
                             <th>Kategori</th>
                             <th>Deskripsi</th>

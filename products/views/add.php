@@ -14,7 +14,7 @@
                     <?= form_error('nama_produk', '<small class="text-danger">', '<small>'); ?>
                 </div>
                 <div class="form-group">
-                    <input type="text" name="harga_produk" class="form-control form-control-user" placeholder="Harga Produk">
+                    <input type="text" name="harga_produk" class="form-control form-control-user" placeholder="Biaya Produk">
                     <?= form_error('harga_produk', '<small class="text-danger">', '<small>'); ?>
                 </div>
                 <div class="form-group">

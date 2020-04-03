@@ -87,9 +87,7 @@ class Products extends CI_Controller {
             'upload_path' => "./assets/img/produk/",
             'allowed_types' => "gif|jpg|png|jpeg",
             'overwrite' => TRUE,
-            'file_name' => $final . ".jpeg",
-            'max_height' => "4864",
-            'max_width' => "6464"
+            'file_name' => $final . ".jpeg"
         );
 
 
@@ -167,9 +165,7 @@ class Products extends CI_Controller {
             'upload_path' => "./assets/img/produk/",
             'allowed_types' => "gif|jpg|png|jpeg",
             'overwrite' => TRUE,
-            'file_name' => $final . ".jpeg",
-            'max_height' => "4864",
-            'max_width' => "6464"
+            'file_name' => $final . ".jpeg"
         );
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
