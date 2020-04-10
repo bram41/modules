@@ -32,6 +32,19 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+            <li class="nav-item mt-2 dropdown mx-0 mx-lg-1">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="mr-3 d-none d-lg-inline text-gray-600 large text-uppercase">Kategori</span>
+                </a>
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <?php foreach ($kategori as $p) : ?>
+                    <a class="dropdown-item" href="<?= base_url('beranda/daftar/'), $p['cat_id'];; ?>">
+                        <?= $p['cat_name']; ?>
+                    </a> 
+                <? endforeach; ?>
+                </div>
+            </li>
           <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<?= base_url('beranda/pembayaran') ?>">Cara Pembayaran</a>
           </li>

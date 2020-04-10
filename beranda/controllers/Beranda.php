@@ -3,17 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Beranda extends CI_Controller {
 
+     var $data;
+
 	function __construct()
 	{
           parent::__construct();
           $this->load->model('mBeranda');
-          
+          $this->data = $this->mBeranda->getAllKategori();
      }
      
      public function index()
      {
-          $data['kategori'] = $this->mBeranda->getAllKategori();
+          $data['kategori'] = $this->data;
           $data['title'] = "RentALL";
+          $data['product'] = $this->mBeranda->getAllProduct();
           $this->load->view('template/beranda_header', $data);
           $this->load->view('index', $data);
           $this->load->view('template/beranda_footer');
@@ -21,6 +24,7 @@ class Beranda extends CI_Controller {
      
      public function daftar($id)
      {
+          $data['kategori'] = $this->data;
           $data['product'] = $this->mBeranda->getProduct($id);
           $data['title'] = "Daftar Produk";
           $this->load->view('template/beranda_header', $data);
@@ -30,6 +34,7 @@ class Beranda extends CI_Controller {
 
      public function product($id)
      {
+          $data['kategori'] = $this->data;
           $data['product'] = $this->mBeranda->getDetail($id);
           $data['title'] = "Detail Produk";
           $this->load->view('template/beranda_header', $data);
@@ -63,6 +68,7 @@ class Beranda extends CI_Controller {
           if ($this->simple_login->cek_login() == TRUE){
                redirect('');
           } else {
+               $data['kategori'] = $this->data;
                $data['product'] = $this->mBeranda->getATC();
                $data['price'] = $this->mBeranda->getTotal();
                $data['title'] = "Keranjang Belanja";
@@ -109,6 +115,7 @@ class Beranda extends CI_Controller {
 
      public function berhasil()
      {
+          $data['kategori'] = $this->data;
           $data['title'] = "Pesanan Berhasil";
           $this->load->view('template/beranda_header', $data);
           $this->load->view('berhasil');
@@ -120,6 +127,7 @@ class Beranda extends CI_Controller {
           if ($this->simple_login->cek_login() == TRUE){
                redirect('');
           } else {
+          $data['kategori'] = $this->data;
                $data['order'] = $this->mBeranda->getOrder();
                $data['title'] = "Daftar Pesanan";
                $this->load->view('template/beranda_header', $data);
@@ -131,6 +139,7 @@ class Beranda extends CI_Controller {
      public function pembayaran()
      {
                $data['title'] = "Cara Pembayaran";
+          $data['kategori'] = $this->data;
                $this->load->view('template/beranda_header', $data);
                $this->load->view('pembayaran');
                $this->load->view('template/beranda_footer');
@@ -139,6 +148,7 @@ class Beranda extends CI_Controller {
      public function about()
      {
                $data['title'] = "Tentang RentALL";
+          $data['kategori'] = $this->data;
                $this->load->view('template/beranda_header', $data);
                $this->load->view('about');
                $this->load->view('template/beranda_footer');
