@@ -38,6 +38,13 @@
     </div>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="<?= base_url('order'); ?>">
+            <i class="fas fa-folder"></i>
+            <span>Daftar Pesanan</span></a>
+    </li>
+
+
     <?php if($this->session->userdata('role') == '1'): ?>
         <!-- Nav Item - Profil User -->
         <li class="nav-item">
