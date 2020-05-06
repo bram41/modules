@@ -13,9 +13,11 @@ class mBeranda extends CI_Model{
         return $this->db->get('products')->result_array();
     }
 
-    public function getAllProduct()
-    {   
-        return $this->db->get('products')->result_array();
+    public function getAllProduct($limit, $start)
+    {
+        $query = $this->db->get('products', $limit, $start);
+        return $query;
+        
     }
 
     public function getDetail($id)

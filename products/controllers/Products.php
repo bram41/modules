@@ -1,31 +1,32 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Products extends CI_Controller {
+class Products extends CI_Controller
+{
 
-	function __construct()
-	{
+    function __construct()
+    {
         parent::__construct();
-        $this->simple_login->cek_admin(); 
+        $this->simple_login->cek_admin();
         $this->load->model('Barang');
-	}
-	
-	public function index()
-	{
-		$data['judul'] = "Daftar Produk";
+    }
+
+    public function index()
+    {
+        $data['judul'] = "Daftar Produk";
         $data['barang'] = $this->Barang->getAllBarang();
         $data['username'] = $this->session->userdata('username');
-		$this->load->view('dashboard/template/home_header', $data);
-		$this->load->view('dashboard/template/home_sidebar');
-		$this->load->view('dashboard/template/home_topbar', $data);
-		$this->load->view('index', $data);
-		$this->load->view('dashboard/template/home_footer');
-	}
+        $this->load->view('dashboard/template/home_header', $data);
+        $this->load->view('dashboard/template/home_sidebar');
+        $this->load->view('dashboard/template/home_topbar', $data);
+        $this->load->view('index', $data);
+        $this->load->view('dashboard/template/home_footer');
+    }
 
-	public function add()
-	{
+    public function add()
+    {
         $data['kategori'] = $this->Barang->getAllKategori();
-        if(!$this->Barang->getAllKategori()){
+        if (!$this->Barang->getAllKategori()) {
             $this->session->set_flashdata('error', 'Kategori tidak ditemukan, silahkan tambahkan kategori terlebih dahulu');
             redirect('products');
         } else {
@@ -37,20 +38,20 @@ class Products extends CI_Controller {
             $this->load->view('add', $data);
             $this->load->view('dashboard/template/home_footer');
         }
-	}
+    }
 
-	public function edit($id)
-	{
-		$data['judul'] = "Edit Produk";
+    public function edit($id)
+    {
+        $data['judul'] = "Edit Produk";
         $data['kategori'] = $this->Barang->getAllKategori();
-		$data['edit'] = $this->Barang->getBarang($id);
+        $data['edit'] = $this->Barang->getBarang($id);
         $data['username'] = $this->session->userdata('username');
-		$this->load->view('dashboard/template/home_header', $data);
-		$this->load->view('dashboard/template/home_sidebar');
-		$this->load->view('dashboard/template/home_topbar', $data);
-		$this->load->view('edit', $data);
-		$this->load->view('dashboard/template/home_footer');
-	}
+        $this->load->view('dashboard/template/home_header', $data);
+        $this->load->view('dashboard/template/home_sidebar');
+        $this->load->view('dashboard/template/home_topbar', $data);
+        $this->load->view('edit', $data);
+        $this->load->view('dashboard/template/home_footer');
+    }
 
     public function tambah_produk()
     {
@@ -71,7 +72,6 @@ class Products extends CI_Controller {
         } else {
             $this->_tambahproduk();
         }
-    
     }
 
     private function _tambahproduk()
@@ -80,8 +80,8 @@ class Products extends CI_Controller {
         $harga_produk = $this->input->post('harga_produk', true);
         $deskripsi_produk = $this->input->post('deskripsi_produk', true);
         $kategori_produk = $this->input->post('kategori_produk', true);
-		$total_produk = $this->db->count_all_results('products');
-		$final = $total_produk + 1;
+        $total_produk = $this->db->count_all_results('products');
+        $final = $total_produk + 1;
 
         $config = array(
             'upload_path' => "./assets/img/produk/",
@@ -90,10 +90,9 @@ class Products extends CI_Controller {
             'file_name' => $final . ".jpeg"
         );
 
-
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
-		$this->upload->do_upload('upload_image');
+        $this->upload->do_upload('upload_image');
 
         $data['errors'] = $this->upload->display_errors('<p>', '</p>');
         $data['result'] = print_r($this->upload->data(), true);
@@ -104,8 +103,8 @@ class Products extends CI_Controller {
             redirect('products');
         } else {
             $dataa = array(
-				'prod_id' => $final,
-				'vend_id' => $final,
+                'prod_id' => $final,
+                'vend_id' => $final,
                 'prod_name' => $nama_produk,
                 'prod_price' => $harga_produk,
                 'prod_desc' => $deskripsi_produk,
@@ -123,12 +122,12 @@ class Products extends CI_Controller {
                 'ip' => $ip_address,
                 'keterangan' => $keterangan
             );
-            $this->db->insert('log', $data);  
+            $this->db->insert('log', $data);
 
             redirect('products');
         }
     }
-	
+
     public function edit_produk()
     {
         $username = $this->session->userdata('username');
@@ -142,8 +141,8 @@ class Products extends CI_Controller {
             $this->form_validation->set_rules('kategori_produk', 'Kategori', 'trim|required');
 
             if ($this->form_validation->run() == false) {
-				$data['errors'] = null;
-				$this->index();
+                $data['errors'] = null;
+                $this->index();
             } else {
                 $this->_editproduk();
             }
@@ -171,8 +170,8 @@ class Products extends CI_Controller {
         $this->upload->initialize($config);
         $image = $this->upload->do_upload('upload_image');
 
-        if ($image != null){
-            
+        if ($image != null) {
+
             $data['errors'] = $this->upload->display_errors('<p>', '</p>');
             $data['result'] = print_r($this->upload->data(), true);
             $data['files']  = print_r($_FILES, true);
@@ -220,10 +219,9 @@ class Products extends CI_Controller {
             'ip' => $ip_address,
             'keterangan' => $keterangan
         );
-        $this->db->insert('log', $data);  
+        $this->db->insert('log', $data);
 
         redirect('products');
-
     }
 
     public function delete($id)
@@ -232,10 +230,10 @@ class Products extends CI_Controller {
         $image = $this->db->get('products')->result_array();
 
         foreach ($image as $p) :
-        $nama = $p['prod_name'];
-        $gambar = $p['prod_image'];
-        $path = "./assets/img/produk/$gambar";
-        unlink($path); 
+            $nama = $p['prod_name'];
+            $gambar = $p['prod_image'];
+            $path = "./assets/img/produk/$gambar";
+            unlink($path);
         endforeach;
 
         $ip_address = $_SERVER['REMOTE_ADDR'];
@@ -246,7 +244,7 @@ class Products extends CI_Controller {
             'ip' => $ip_address,
             'keterangan' => $keterangan
         );
-        $this->db->insert('log', $data);    
+        $this->db->insert('log', $data);
 
         $this->db->where('prod_id', $id);
         $this->db->delete('products');
