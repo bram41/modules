@@ -16,4 +16,29 @@ class Account extends CI_Controller {
 		$this->load->view('dashboard/template/home_footer');
     }
 
+    public function hapusAkun()
+    {
+        $this->db->where('id_user', $this->session->userdata('id'));
+        $data = $this->db->get('users')->result_array();
+
+        foreach ($data as $p) :
+            $nama = $p['nama'];
+        endforeach;
+
+        $ip_address = $_SERVER['REMOTE_ADDR'];
+        $username = $this->session->userdata('username');
+        $keterangan = "Menghapus akun $nama";
+        $data = array(
+            'username' => $username,
+            'ip' => $ip_address,
+            'keterangan' => $keterangan
+        );
+        $this->db->insert('log', $data);
+
+        $this->db->where('id_user', $this->session->userdata('id'));
+        $this->db->delete('users');
+
+        redirect('login/logout');
+    }
+
 }

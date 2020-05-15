@@ -11,6 +11,7 @@
   <title><?= $title ?></title>
 
   <!-- Custom fonts for this theme -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
   <link href="<?= base_url('assets/template_beranda/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
@@ -62,6 +63,10 @@
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a class="dropdown-item"  href="" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-user-times fa-sm fa-fw mr-2 text-gray-400""></i>
+                        Hapus Akun
+                    </a>
                     <a class="dropdown-item" href="<?= base_url('beranda/pesanan') ?>">
                     <i class="fas fa-align-justify fa-sm fa-fw mr-2 text-gray-400""></i>
                         Daftar Pesanan

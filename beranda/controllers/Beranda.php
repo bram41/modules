@@ -50,7 +50,7 @@ class Beranda extends CI_Controller {
           $data['pagination'] = $this->pagination->create_links();
 
           // $this->load->view('view', $data);
-          $data['kategori'] = $this->data;
+          $data['kategori'] = $this->mBeranda->getAllKategori();
           $data['title'] = "RentALL";
           $this->load->view('template/beranda_header', $data);
           $this->load->view('index', $data);
