@@ -4,7 +4,7 @@
         <!-- About Section Heading -->
         <div class="row">
             <?php
-                if( ! empty($data)){ // Jika data pada database tidak sama dengan empty (alias ada datanya)
+                if($data->num_rows() > 0){ // Jika data pada database tidak sama dengan empty (alias ada datanya)
                 foreach($data->result() as $p): // Lakukan looping pada variabel siswa dari controller
                 ?>
                 
