@@ -9,6 +9,10 @@
   <meta name="author" content="">
 
   <title><?= $title ?></title>
+  <!-- <script> -->
+    <!-- var baseurl = "<?= base_url(''); ?>"; // Buat variabel baseurl untuk nanti di akses pada file config.js -->
+  <!-- </script>
+  <script src="<?= base_url("assets/js/config.js"); ?>"></script>  -->
 
   <!-- Custom fonts for this theme -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -27,25 +31,31 @@
   <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="<?= base_url(); ?>">RentALL</a>
-      <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        Menu
+      <form class="user" method="POST" action="<?= base_url('beranda/search'); ?>">
+          <div class="row"> 
+            <input type="text" name="search" class="form-control mt-1 w-50 ml-5" id="search">
+            <!-- <input class="btn btn-primary btn-user btn-block mt-4 w-50 center" type="submit" name="btnSubmit" value="Tambah Kategori" />  -->
+            <input type="submit" class="btn btn-primary h-75 mt-1 ml-2" id="btn-search" value="Cari"/>
+          </div>
+      </form>
+      <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded  mt-1 " type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item mt-2 dropdown mx-0 mx-lg-1">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-3 d-none d-lg-inline text-gray-600 large text-uppercase">Kategori</span>
-                </a>
-                <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <?php foreach ($kategori as $p) : ?>
-                    <a class="dropdown-item" href="<?= base_url('beranda/daftar/'), $p['cat_id'];; ?>">
-                        <?= $p['cat_name']; ?>
-                    </a> 
-                <? endforeach; ?>
-                </div>
-            </li>
+          <li class="nav-item mt-2 dropdown mx-0 mx-lg-1">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Kategori
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+            <?php foreach ($kategori as $p) : ?>
+                <a class="dropdown-item" href="<?= base_url('beranda/daftar/'), $p['cat_id'];; ?>">
+                    <?= $p['cat_name']; ?>
+                </a> 
+            <? endforeach; ?>
+            </div>
+          </li>
           <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="<?= base_url('beranda/pembayaran') ?>">Cara Pembayaran</a>
           </li>

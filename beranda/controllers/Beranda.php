@@ -10,6 +10,7 @@ class Beranda extends CI_Controller {
           parent::__construct();
           $this->load->model('mBeranda');
           $this->load->library('pagination');
+          $this->data = $this->mBeranda->getAllKategori();
      }
      
      public function index()
@@ -50,13 +51,26 @@ class Beranda extends CI_Controller {
           $data['pagination'] = $this->pagination->create_links();
 
           // $this->load->view('view', $data);
-          $data['kategori'] = $this->mBeranda->getAllKategori();
+          
+          $data['kategori'] = $this->data;
           $data['title'] = "RentALL";
           $this->load->view('template/beranda_header', $data);
           $this->load->view('index', $data);
           $this->load->view('template/beranda_footer');
      }
      
+     public function search()
+     {
+          $data['pagination'] = 1;
+          $search = $this->input->post('search');
+          $data['data'] = $this->mBeranda->searchProduct($search);  
+          $data['kategori'] = $this->data;
+          $data['title'] = "RentALL";
+          $this->load->view('template/beranda_header', $data);
+          $this->load->view('index', $data);
+          $this->load->view('template/beranda_footer');
+     }
+
      public function daftar($id)
      {
           $data['kategori'] = $this->data;
@@ -174,7 +188,7 @@ class Beranda extends CI_Controller {
      public function pembayaran()
      {
                $data['title'] = "Cara Pembayaran";
-          $data['kategori'] = $this->data;
+               $data['kategori'] = $this->data;
                $this->load->view('template/beranda_header', $data);
                $this->load->view('pembayaran');
                $this->load->view('template/beranda_footer');
