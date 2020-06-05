@@ -1,6 +1,8 @@
 <!-- About Section -->
 <section class="page-section bg-primary text-white mb-0 mt-5">
     <div class="container">
+<div class="row" id="view">
+    <div class="container">
         <!-- About Section Heading -->
         <h2 class="page-section-heading text-center text-uppercase text-white my-5">Daftar Pesanan</h2>
 
@@ -41,5 +43,7 @@
                     </div>
                 </div>
         <? endforeach; ?>
+    </div>
+    </div>
     </div>
 </section>

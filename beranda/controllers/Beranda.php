@@ -46,29 +46,29 @@ class Beranda extends CI_Controller {
           
           $this->pagination->initialize($config); // Set konfigurasi paginationnya
           $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-          $data['data'] = $this->mBeranda->getAllProduct($config["per_page"], $data['page']);           
+          $data['product'] = $this->mBeranda->getAllProduct($config["per_page"], $data['page']);           
    
           $data['pagination'] = $this->pagination->create_links();
 
-          // $this->load->view('view', $data);
-          
           $data['kategori'] = $this->data;
           $data['title'] = "RentALL";
           $this->load->view('template/beranda_header', $data);
           $this->load->view('index', $data);
           $this->load->view('template/beranda_footer');
      }
-     
-     public function search()
-     {
-          $data['pagination'] = 1;
-          $search = $this->input->post('search');
-          $data['data'] = $this->mBeranda->searchProduct($search);  
-          $data['kategori'] = $this->data;
-          $data['title'] = "RentALL";
-          $this->load->view('template/beranda_header', $data);
-          $this->load->view('index', $data);
-          $this->load->view('template/beranda_footer');
+
+     public function search(){
+          // Ambil data NIS yang dikirim via ajax post
+          $keyword = $this->input->post('keyword');
+          $produk = $this->mBeranda->search($keyword);
+          $data['product'] = $produk;
+          $hasil = $this->load->view('indexSearch', $data, true);
+         
+          // Buat sebuah array
+          $callback = array(
+               'hasil' => $hasil, // Set array hasil dengan isi dari view.php yang diload tadi
+          );
+          echo json_encode($callback); // konversi varibael $callback menjadi JSON
      }
 
      public function daftar($id)

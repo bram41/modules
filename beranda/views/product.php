@@ -1,6 +1,8 @@
 <!-- About Section -->
 <section class="page-section bg-primary text-white mb-0 mt-5">
     <div class="container">
+<div class="row" id="view">
+    <div class="container">
 
     <?php foreach ($product as $p) : ?>
         <div class="row">
@@ -28,5 +30,7 @@
         </div>
     <? endforeach; ?>
 
+    </div>
+    </div>
     </div>
 </section>

@@ -7,14 +7,14 @@ class mBeranda extends CI_Model{
         return $this->db->get('category')->result_array();
     }
 
-    public function searchProduct($search)
-    {
-        $this->db->like('prod_name', $search);
-        $result = $this->db->get('products'); // Tampilkan data produk berdasarkan nama produk
-
+    public function search($keyword){
+        $this->db->like('prod_name', $keyword);
+        $this->db->or_like('prod_desc', $keyword);
+   
+        $result = $this->db->get('products'); // Tampilkan data siswa berdasarkan keyword
         return $result;
-    }
-    
+   }
+
     public function getProduct($id)
     {   
         $this->db->where('cat_id', $id);

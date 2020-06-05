@@ -3,7 +3,7 @@
     <div class="container">
         <!-- About Section Heading -->
         <h3 class="page-section-heading text-center text-uppercase text-white mb-5">Daftar Produk</h3>
-        <div class="row">
+        <div class="row" id="view">
             <?php foreach ($product as $p) : ?>
                 <div class="col-lg-4 col-sm-2 mb-5">
                         <div class="card" style="width: 18rem;">

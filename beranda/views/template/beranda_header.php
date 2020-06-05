@@ -9,10 +9,9 @@
   <meta name="author" content="">
 
   <title><?= $title ?></title>
-  <!-- <script> -->
-    <!-- var baseurl = "<?= base_url(''); ?>"; // Buat variabel baseurl untuk nanti di akses pada file config.js -->
-  <!-- </script>
-  <script src="<?= base_url("assets/js/config.js"); ?>"></script>  -->
+  <script>
+    var baseurl = "<?php echo base_url(""); ?>"; // Buat variabel baseurl untuk nanti di akses pada file config.js
+  </script>
 
   <!-- Custom fonts for this theme -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -31,13 +30,10 @@
   <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="<?= base_url(); ?>">RentALL</a>
-      <form class="user" method="POST" action="<?= base_url('beranda/search'); ?>">
-          <div class="row"> 
-            <input type="text" name="search" class="form-control mt-1 w-50 ml-5" id="search">
-            <!-- <input class="btn btn-primary btn-user btn-block mt-4 w-50 center" type="submit" name="btnSubmit" value="Tambah Kategori" />  -->
-            <input type="submit" class="btn btn-primary h-75 mt-1 ml-2" id="btn-search" value="Cari"/>
-          </div>
-      </form>
+        <div class="row"> 
+          <input type="text" name="keyword" class="form-control mt-1 w-50 ml-5" id="keyword">
+          <input type="button" class="btn btn-primary h-75 mt-1 ml-2" id="btn-search" value="Cari"/>
+        </div>
       <button class="navbar-toggler navbar-toggler-right text-uppercase font-weight-bold bg-primary text-white rounded  mt-1 " type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fas fa-bars"></i>
       </button>

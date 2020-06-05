@@ -34,6 +34,7 @@
   <script src="<?= base_url('assets/template_beranda/'); ?>vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="<?= base_url('assets/template_beranda/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="<?= base_url('assets/template_beranda/'); ?>js/freelancer.min.js"></script>
+  <script src="<?= base_url('assets/'); ?>js/search.js"></script>
 
 </body>
 
