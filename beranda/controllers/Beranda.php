@@ -144,6 +144,7 @@ class Beranda extends CI_Controller {
                     );
                     $this->db->where('cart_id', $id);
                     $this->db->update('cart', $data);
+                    $this->session->set_flashdata('sukses', 'Berhasil mengubah jumlah produk ');
                     redirect('beranda/keranjang');
                }
 
@@ -154,6 +155,7 @@ class Beranda extends CI_Controller {
      {
           $this->db->where('cart_id', $id);
           $this->db->delete('cart');
+          $this->session->set_flashdata('sukses', 'Berhasil menghapus produk dari keranjang');
           redirect('beranda/keranjang');
      }
 
