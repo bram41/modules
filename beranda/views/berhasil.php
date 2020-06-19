@@ -1,5 +1,5 @@
 <?php
-header('Refresh:5; url= ' . base_url() . '/');
+header('Refresh:5; url= ' . base_url());
 ?>
 <!-- About Section -->
 <section class="page-section bg-primary text-white mb-0 mt-5 " style="min-height:514px;">

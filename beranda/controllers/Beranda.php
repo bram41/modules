@@ -161,7 +161,29 @@ class Beranda extends CI_Controller {
 
      public function co()
      {
+          $id_user = $this->session->userdata('id');
+          $query = $this->db->query('select * from users where id_user = "'.$id_user.'"')->result_array();
+          $email = $query['0']['email'];
+          // Konfigurasi email
+          $config = [
+               'mailtype'  => 'html',
+               'charset'   => 'utf-8',
+               'protocol'  => 'smtp',
+               'smtp_host' => 'ssl://smtp.gmail.com',
+               'smtp_user' => 'supermairosbro101@gmail.com',    // Ganti dengan email gmail kamu
+               'smtp_pass' => 'akuseorangkapiten',      // Password gmail kamu
+               'smtp_port' => 465,
+               'crlf'      => "\r\n",
+               'newline'   => "\r\n"
+          ];
+          $this->load->library('email', $config);
+          $this->email->from('no-reply@rentall.com', 'rentall.com | abraham');
+          $this->email->to($email);
+          $this->email->subject('Pesanan Rentall');
+          $this->email->message("Pesanan pada rentall telah kami terima dan sudah pada pemrosesan barang");
+     
           $this->mBeranda->co();
+          
      }
 
      public function berhasil()
